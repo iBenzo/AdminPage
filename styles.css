@@ -1,0 +1,332 @@
+:root {
+  font-size: 16px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  --text-primary: black;
+  --text-secondary: white;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --transition-speed: 1s;
+  --sideBar-color: #0ea5e9;
+  --sideBar-width: clamp(210px, 22vw, 325px);
+  --header-bg-1: #f8f8f8;
+  --header-color-1: #c9c9c9;
+  --header-color-2: #62daff6e;
+  --blue-1: #084c61;
+  --avatar: url("./images/ben-profile.jpg");
+  --content-gray: rgb(235, 235, 235);
+  --transition-notOpen: margin-left 0.4s ease-in;
+  --trasition-open: width 0.4s ease-in;
+}
+.white {
+  filter: invert(100%);
+}
+body {
+  width: 100vw;
+  height: 100vw;
+  display: grid;
+  grid-template-areas:
+    "sideBar header header header"
+    "sideBar content content content";
+  grid-template-rows: 0.6fr 4fr;
+  grid-template-columns: 5rem 1fr 1fr 1fr;
+}
+
+.sideBar {
+  grid-area: sideBar;
+  background-color: var(--sideBar-color);
+  width: 5rem;
+  position: fixed;
+  transition: var(--trasition-open);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.sideBar:hover {
+  width: var(--sideBar-width);
+}
+.menuItem > h1 {
+  display: none;
+  margin-left: 5%;
+}
+.sideBar:hover > .menuItem > h1 {
+  display: inline;
+}
+
+.sideBar:hover ~ .header,
+.sideBar:hover ~ .content {
+  margin-left: calc(var(--sideBar-width) - 5rem);
+}
+.menuItem {
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.menuItem > * {
+  cursor: pointer;
+}
+.sideBar > div:first-child {
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-top: 10px;
+  font-size: 50px;
+  height: 50px;
+}
+.dashIcon {
+  height: 50px;
+  width: 50px;
+}
+
+.sideBar > div:not(:first-child) > * {
+  padding: 1vw 0.1vw 0.1vw 0vw;
+  font-size: 18px;
+  padding-left: 20px;
+}
+.sideBar > div:nth-child(8) {
+  padding-top: 60px;
+}
+.header {
+  grid-area: header;
+  transition: var(--transition-notOpen);
+  background-color: var(--header-bg-1);
+  padding: 1.5rem 3rem;
+  border-bottom: 2px solid rgb(219, 219, 219);
+  position: sticky;
+  top: 0;
+}
+
+.topHeader {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  margin-bottom: 2.5rem;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  width: 100%;
+}
+.search > input {
+  display: inline-block;
+  border: 0;
+  background-color: var(--header-color-1);
+  padding: 0.5rem 1.5rem;
+  outline-color: var(--blue-1);
+  margin-left: 1.25rem;
+  border-radius: 5px;
+  width: min(80%, 600px);
+}
+
+.header .account {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.avatar {
+  background: var(--avatar) center center/ cover no-repeat;
+  border-radius: 50%;
+}
+.account .avatar {
+  margin: 0 1rem 0 2.5rem;
+  height: 40px;
+  width: 40px;
+}
+.bottomHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.profile .avatar {
+  width: 75px;
+  height: 75px;
+}
+.greeting {
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+.profile .name {
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+}
+.btn {
+  background-color: var(--sideBar-color);
+  color: var(--text-secondary);
+  font-weight: 800;
+  padding: 0.5rem 1.8rem;
+  border-radius: 7px;
+  font-size: 20px;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+.content {
+  grid-area: content;
+  transition: var(--transition-notOpen);
+  background-color: var(--content-gray);
+  display: grid;
+  padding: 2rem;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: min-content 1fr;
+  gap: 2rem;
+  grid-template-areas:
+    "projects announcments"
+    "projects trending";
+  overflow: auto;
+  height: 100%;
+}
+
+.content h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.projects {
+  grid-area: projects;
+}
+.projects .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 250px;
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+
+.projects .card {
+  background-color: var(--header-color-2);
+  border-left: 10px solid orange;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects .card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.projects .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.projects .icon {
+  margin-top: auto;
+  align-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.4rem;
+  align-items: center;
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+.card {
+  background-color: rgba(45, 187, 187, 0.459);
+  padding: 2rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /0.1), 0 4px 6px -4px rgb(0 0 0/0.1);
+}
+.announcements {
+  grid-area: announcments;
+}
+.announcement {
+  width: 25ch;
+  padding: 1rem 0;
+}
+.announcement:first-child {
+  padding-top: 0;
+}
+.announcement:last-child {
+  padding-bottom: 0;
+}
+
+.announcement h5 {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.announcement p {
+  font-size: 0.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.announcement + .announcement {
+  border-top: rgb(175, 172, 172) 1px solid;
+}
+
+.trending {
+  grid-area: trending;
+}
+
+.trending .card {
+  padding: 1.5rem;
+}
+
+.trend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.trend + .trend {
+  margin-top: 1.5rem;
+}
+.trend .account {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.trend .username {
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+
+.trend-1 .avatar2 {
+  background: var(--avatar) center center / cover no-repeat;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.trend-2 .avatar3 {
+  background: var(--avatar) center center / cover no-repeat;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.trend-3 .avatar4 {
+  background: var(--avatar) center center / cover no-repeat;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.trend4 .avatar5 {
+  background: var(--avatar) center center / cover no-repeat;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
